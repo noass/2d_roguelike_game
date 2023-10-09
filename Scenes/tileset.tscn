@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://652chqotdl4s"]
+
+[ext_resource type="Texture2D" uid="uid://cd8loodtabgsc" path="res://Assets/Sprites/tileset1_16x16.png" id="1_tlkms"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_o1ca8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_kpgtu"]
+resource_name = "tileset1_16x16"
+texture = ExtResource("1_tlkms")
+0:0/0 = 0
+0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+0:0/0/physics_layer_0/angular_velocity = 0.0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/z_index = -1
+1:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
+1:0/0/physics_layer_0/angular_velocity = 0.0
+
+[sub_resource type="TileSet" id="TileSet_4prb4"]
+physics_layer_0/collision_layer = 1
+physics_layer_0/physics_material = SubResource("PhysicsMaterial_o1ca8")
+sources/0 = SubResource("TileSetAtlasSource_kpgtu")
+
+[node name="TileMap" type="TileMap"]
+tile_set = SubResource("TileSet_4prb4")
+format = 2
