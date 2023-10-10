@@ -21,6 +21,7 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_o1ca8")
 sources/0 = SubResource("TileSetAtlasSource_kpgtu")
 
-[node name="TileMap" type="TileMap"]
+[node name="TileMap" type="TileMap" groups=["bulletStop"]]
+y_sort_enabled = true
 tile_set = SubResource("TileSet_4prb4")
 format = 2
