@@ -175,18 +175,18 @@ _data = {
 script = ExtResource("1_hryaa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -5)
+rotation = 0.279253
 scale = Vector2(2, 2)
 texture = ExtResource("2_q1i3p")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5)
+rotation = 0.279253
 shape = SubResource("CapsuleShape2D_1gq81")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
-limit_left = 0
-limit_top = 0
-limit_right = 960
-limit_bottom = 640
 position_smoothing_enabled = true
 position_smoothing_speed = 5.25
 

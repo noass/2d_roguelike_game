@@ -17,6 +17,9 @@ texture = ExtResource("1_tlkms")
 1:0/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSet" id="TileSet_4prb4"]
+uv_clipping = true
+occlusion_layer_0/light_mask = 1
+occlusion_layer_0/sdf_collision = true
 physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_o1ca8")
 sources/0 = SubResource("TileSetAtlasSource_kpgtu")
