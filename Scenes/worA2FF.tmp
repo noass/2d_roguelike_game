@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://c00mcs8ds1ee4"]
+[gd_scene load_steps=6 format=3 uid="uid://c00mcs8ds1ee4"]
 
 [ext_resource type="PackedScene" uid="uid://q2rbuw57s2br" path="res://Scenes/player.tscn" id="1_dryvw"]
 [ext_resource type="Script" path="res://Scripts/world.gd" id="1_my1l2"]
+[ext_resource type="PackedScene" uid="uid://cugt15l8pjqjk" path="res://Scenes/mob.tscn" id="3_m6krl"]
 
 [sub_resource type="Gradient" id="Gradient_7e2kw"]
 offsets = PackedFloat32Array(0, 0.68)
@@ -19,12 +20,17 @@ script = ExtResource("1_my1l2")
 
 [node name="Player" parent="." instance=ExtResource("1_dryvw")]
 position = Vector2(496, 320)
-motion_mode = 1
 
 [node name="PointLight2D" type="PointLight2D" parent="Player"]
-position = Vector2(6.10352e-05, 0.000114441)
-scale = Vector2(6.375, 6.375)
+position = Vector2(-2.28882e-05, 3.05176e-05)
+scale = Vector2(4.75, 4.75)
 blend_mode = 2
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 0.862745)
 texture = SubResource("GradientTexture2D_ufrp7")
+
+[node name="RayCast2D" type="RayCast2D" parent="Player"]
+
+[node name="Mob" parent="." instance=ExtResource("3_m6krl")]
+position = Vector2(320, 304)
+motion_mode = 1

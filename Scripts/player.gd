@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 300
+const SPEED = 250
 
 var bullet = preload("res://Scenes/bullet.tscn")
 
@@ -24,12 +24,12 @@ func _process(delta):
 	move_and_slide()
 	
 	# CAMERA ZOOM
-	if Input.is_action_just_pressed("F") and !zoomed:
-		$Camera2D.zoom = Vector2(0.05, 0.05)
-		zoomed = true
-	elif Input.is_action_just_pressed("F") and zoomed:
-		$Camera2D.zoom = Vector2(1.25, 1.25)
-		zoomed = false
+	if Input.is_action_just_pressed("SCROLL_WHEEL_DOWN"):
+		$Camera2D.zoom.x -= 0.05
+		$Camera2D.zoom.y -= 0.05
+	elif Input.is_action_just_pressed("SCROLL_WHEEL_UP"):
+		$Camera2D.zoom.x += 0.05
+		$Camera2D.zoom.y += 0.05
 		
 	if Input.is_action_just_pressed("R"):
 		get_tree().reload_current_scene()

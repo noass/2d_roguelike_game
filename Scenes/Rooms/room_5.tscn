@@ -5,7 +5,7 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p6lye"]
 size = Vector2(480, 320)
 
-[node name="room2" type="Node2D"]
+[node name="room2" type="Node2D" groups=["room"]]
 scale = Vector2(2, 2)
 
 [node name="roomArea" type="Area2D" parent="."]

@@ -12,46 +12,36 @@ var room6 = preload("res://Scenes/Rooms/room_6.tscn")
 var room7 = preload("res://Scenes/Rooms/room_7.tscn")
 
 var roomArr = [room1, room2, room3, room4, room5, room6, room7]
+var generatedRooms = [] # List to store generated rooms
 
-var room_count = 0
 var rooms_to_generate = randi_range(40, 60)
 var numberOfRooms = 0
 
-func _init():
+var mob = preload("res://Scenes/mob.tscn")
+var mobGroup = [] # List to store mobs
+var spawnMobs = 40
+var starting_room = null
+
+func _ready():
 	randomize()
-	dir_contents("res://Scenes/Rooms/")
-	var starting_room = roomArr[0].instantiate()
+	starting_room = roomArr[0].instantiate()
 	starting_room.position = Vector2(0, 0)
 	add_child(starting_room)
-	
+	generatedRooms.append(starting_room) # Add the starting room to the generated rooms list
 	generate_rooms(starting_room)
+	spawnMobsInRooms()
 	print("Number of rooms: " + str(numberOfRooms))
 
 func _physics_process(delta):
 	pass
 
-func dir_contents(path):
-	var dir = DirAccess.open(path)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if dir.current_is_dir():
-				print("Found directory: " + file_name)
-			else:
-				room_count += 1
-			file_name = dir.get_next()
-	else:
-		print("An error occurred when trying to access the path.")
-		
-	
 func generate_rooms(starting_room):
 	var queue = []
 	queue.push_back(starting_room)
-	
+
 	while numberOfRooms < rooms_to_generate and queue.size() > 0:
 		var current_room = queue.pop_front()
-		
+
 		for i in range(4):
 			var direction = randi() % 4
 			var offset = Vector2(0, 0)
@@ -63,7 +53,7 @@ func generate_rooms(starting_room):
 				offset.y = ROOM_SIZE_Y
 			else:
 				offset.y = -ROOM_SIZE_Y
-		
+
 			var new_position = current_room.position + offset
 			var overlaps = false
 
@@ -72,10 +62,41 @@ func generate_rooms(starting_room):
 					if new_position.distance_to(child.position) < ROOM_SIZE_X:
 						overlaps = true
 						break
-			
+
 			if not overlaps:
 				var new_room = roomArr[randi() % roomArr.size()].instantiate()
 				new_room.position = new_position
 				add_child(new_room)
 				queue.push_back(new_room)
 				numberOfRooms += 1
+
+func spawnMobsInRooms():
+	var availableRooms = generatedRooms.duplicate()  # Make a copy of the generated rooms
+
+	# Remove the starting room from the list
+	if starting_room in availableRooms:
+		availableRooms.erase(availableRooms.find(starting_room))
+
+	for i in range(spawnMobs):
+		if availableRooms.is_empty():
+			break  # No more rooms to spawn mobs in
+
+		var room = availableRooms[randi() % availableRooms.size()]
+		var roomArea = room.get_node("roomArea")
+		var roomAreaRect = roomArea.get_node("CollisionShape2D").shape.get_rect()
+
+		var mobInstance = mob.instantiate()
+		mobInstance.position = Vector2(
+			roomArea.global_position.x + randi_range(40, roomAreaRect.size.x - 40),
+			roomArea.global_position.y + randi_range(40, roomAreaRect.size.y - 40)
+		)
+
+		call_deferred("add_child", mobInstance)
+		mobGroup.append(mobInstance)
+		
+		availableRooms.erase(availableRooms.find(room))  # Remove the room you're spawning mobs in
+		print("Total number of mobs: " + str(spawnMobs) + " | Spawned mobs: " + str(mobGroup.size()))
+
+
+
+
