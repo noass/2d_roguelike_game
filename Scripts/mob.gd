@@ -1,9 +1,23 @@
-extends Area2D
+extends CharacterBody2D
 
-var ray = null
+@onready var ray = $RayCast2D
+@onready var area2D = $Mob
+@onready var hitAnim = $HitAnim
+@onready var hitShader = $Sprite2D.material
+
+
+var movement_speed: float = 150.0
+var movement_target_position: Vector2 = Vector2(0,0)
+
+var health = 3
+
+@onready var navigation_agent: NavigationAgent2D = $NavigationAgent2D
 
 func _ready():
-	ray = $RayCast2D
+	navigation_agent.path_desired_distance = 4.0
+	navigation_agent.target_desired_distance = 4.0
+	hitShader.set_shader_parameter("whitening", 0)
+
 
 func _physics_process(delta):
 	ray.set_target_position(ray.to_local(get_node("../Player").global_position))
@@ -11,3 +25,29 @@ func _physics_process(delta):
 #		visible = true
 #	else:
 #		visible = false
+	
+	if navigation_agent.is_navigation_finished():
+		return
+
+	var current_agent_position: Vector2 = global_position
+	var next_path_position: Vector2 = navigation_agent.get_next_path_position()
+
+	var new_velocity: Vector2 = next_path_position - current_agent_position
+	new_velocity = new_velocity.normalized()
+	new_velocity = new_velocity * movement_speed
+
+	velocity = new_velocity
+	move_and_slide()
+	
+	if health <= 0:
+		queue_free()
+
+
+func _on_pathfind_timer_timeout():
+	navigation_agent.target_position = get_node("../Player").global_position
+
+func _on_mob_area_entered(area):
+	if area.is_in_group("bullet"):
+		health -= 1
+		hitAnim.play("hit")
+		area.queue_free()

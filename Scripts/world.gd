@@ -17,14 +17,13 @@ var generatedRooms = [] # List to store generated rooms
 var rooms_to_generate = randi_range(40, 60)
 var numberOfRooms = 0
 
-var mob = preload("res://Scenes/mob.tscn")
+@onready var mob = preload("res://Scenes/mob.tscn")
 var mobGroup = [] # List to store mobs
 var spawnMobs = 40
-var starting_room = null
+@onready var starting_room = roomArr[0].instantiate()
 
 func _ready():
 	randomize()
-	starting_room = roomArr[0].instantiate()
 	starting_room.position = Vector2(0, 0)
 	add_child(starting_room)
 	generatedRooms.append(starting_room) # Add the starting room to the generated rooms list
@@ -67,6 +66,7 @@ func generate_rooms(starting_room):
 				var new_room = roomArr[randi() % roomArr.size()].instantiate()
 				new_room.position = new_position
 				add_child(new_room)
+				generatedRooms.append(new_room)
 				queue.push_back(new_room)
 				numberOfRooms += 1
 

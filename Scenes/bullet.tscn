@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_83yyi"]
 radius = 4.57
 
-[node name="Bullet" type="Area2D"]
+[node name="Bullet" type="Area2D" groups=["bullet"]]
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_haq2v")
 
@@ -16,4 +16,10 @@ texture = ExtResource("1_mpc6y")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_83yyi")
 
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(3.38813e-21, -8.47033e-22)
+scale = Vector2(0.533333, 0.533333)
+rect = Rect2(-7.515, -7.52, 15.06, 14.985)
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
