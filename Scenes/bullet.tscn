@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://u575kpfowt7n"]
+[gd_scene load_steps=5 format=3 uid="uid://u575kpfowt7n"]
 
 [ext_resource type="Script" path="res://Scripts/bullet.gd" id="1_haq2v"]
 [ext_resource type="Texture2D" uid="uid://67da6nhm1qwp" path="res://Assets/Sprites/bullet.png" id="1_mpc6y"]
+[ext_resource type="AudioStream" uid="uid://dtilpglecenu0" path="res://Assets/Sounds/wallHit.wav" id="3_wdiam"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_83yyi"]
 radius = 4.57
 
 [node name="Bullet" type="Area2D" groups=["bullet"]]
+z_index = 10
 scale = Vector2(1.5, 1.5)
 script = ExtResource("1_haq2v")
 
@@ -21,5 +23,9 @@ position = Vector2(3.38813e-21, -8.47033e-22)
 scale = Vector2(0.533333, 0.533333)
 rect = Rect2(-7.515, -7.52, 15.06, 14.985)
 
+[node name="hit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_wdiam")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="finished" from="hit" to="." method="_on_hit_finished"]

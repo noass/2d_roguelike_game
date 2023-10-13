@@ -16,7 +16,7 @@ scale = Vector2(2, 2)
 [node name="roomArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="roomArea"]
-position = Vector2(240, 176)
+position = Vector2(240, 160)
 shape = SubResource("RectangleShape2D_p6lye")
 
 [node name="TileMap" parent="." instance=ExtResource("1_rukvr")]

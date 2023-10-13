@@ -1,7 +1,20 @@
-[gd_scene load_steps=8 format=3 uid="uid://q2rbuw57s2br"]
+[gd_scene load_steps=23 format=3 uid="uid://q2rbuw57s2br"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_hryaa"]
+[ext_resource type="Shader" path="res://Scripts/Shaders/mobHitWhite.gdshader" id="2_os3il"]
 [ext_resource type="Texture2D" uid="uid://bl3dxhn1ah42x" path="res://Assets/Sprites/player.png" id="2_q1i3p"]
+[ext_resource type="Texture2D" uid="uid://cgq5hxg54c8h7" path="res://Assets/Sprites/hearts_sheet.png" id="3_axo41"]
+[ext_resource type="AudioStream" uid="uid://devaenrctwxdv" path="res://Assets/Sounds/playerDied.wav" id="5_bcq75"]
+[ext_resource type="AudioStream" uid="uid://dm8mldrgdcc4c" path="res://Assets/Sounds/shoot.wav" id="6_lh411"]
+[ext_resource type="AudioStream" uid="uid://brwxmj7ur08gj" path="res://Assets/Sounds/playerHit.wav" id="7_1uxyn"]
+[ext_resource type="Texture2D" uid="uid://hew1tsj1624f" path="res://Assets/Sprites/shadow.png" id="8_x58v3"]
+[ext_resource type="FontFile" uid="uid://c0kgu5wtlr6ti" path="res://Assets/Fonts/m6x11.ttf" id="9_j118e"]
+[ext_resource type="AudioStream" uid="uid://d3nm6txv7gjc0" path="res://Assets/Music/song1.wav" id="10_xibcl"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_05sgu"]
+resource_local_to_scene = true
+shader = ExtResource("2_os3il")
+shader_parameter/whitening = 1.0
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1gq81"]
 radius = 14.0
@@ -56,6 +69,105 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, -5)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material:shader_parameter/whitening")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprite2D:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_0ecun"]
+resource_name = "died"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.5708]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1.385, 2.78)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:material:shader_parameter/whitening")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprite2D:modulate")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_45t5i"]
@@ -167,16 +279,66 @@ tracks/3/keys = {
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uwftn"]
 _data = {
 "RESET": SubResource("Animation_7vhc4"),
+"died": SubResource("Animation_0ecun"),
 "idle": SubResource("Animation_45t5i"),
 "walking": SubResource("Animation_geo1n")
 }
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_mcv6u"]
+radius = 18.3
+height = 58.25
+
+[sub_resource type="Animation" id="Animation_nff3p"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/whitening")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_6bh1t"]
+resource_name = "hurt"
+length = 2.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/whitening")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.9, 1.2, 1.5, 1.8, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_igkd1"]
+_data = {
+"RESET": SubResource("Animation_nff3p"),
+"hurt": SubResource("Animation_6bh1t")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_oqo0i"]
+font = ExtResource("9_j118e")
+font_size = 66
+font_color = Color(1, 0, 0, 1)
+outline_size = 10
+
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 collision_layer = 9
 collision_mask = 9
 script = ExtResource("1_hryaa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_05sgu")
 position = Vector2(0, -5)
 rotation = 0.279253
 scale = Vector2(2, 2)
@@ -189,8 +351,20 @@ shape = SubResource("CapsuleShape2D_1gq81")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.25, 1.25)
-position_smoothing_enabled = true
 position_smoothing_speed = 5.25
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Camera2D"]
+z_index = 4096
+offset_left = -384.0
+offset_top = -256.0
+offset_right = -224.0
+offset_bottom = -192.0
+
+[node name="Sprite2D" type="Sprite2D" parent="Camera2D/HBoxContainer"]
+position = Vector2(80, 32)
+scale = Vector2(3, 3)
+texture = ExtResource("3_axo41")
+hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 speed_scale = 4.0
@@ -198,8 +372,54 @@ libraries = {
 "": SubResource("AnimationLibrary_uwftn")
 }
 
-[node name="ShootTimer" type="Timer" parent="."]
-wait_time = 0.3
-autostart = true
+[node name="DamageArea" type="Area2D" parent="."]
+position = Vector2(0, -1.5)
 
-[connection signal="timeout" from="ShootTimer" to="." method="_on_shoot_timer_timeout"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+shape = SubResource("CapsuleShape2D_mcv6u")
+
+[node name="hurtAnim" type="AnimationPlayer" parent="."]
+speed_scale = 3.0
+libraries = {
+"": SubResource("AnimationLibrary_igkd1")
+}
+
+[node name="playerDied" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_bcq75")
+
+[node name="playerShooting" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_lh411")
+
+[node name="playerHit" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1uxyn")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 21)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("8_x58v3")
+
+[node name="WaitForPlayerDeath" type="Timer" parent="."]
+wait_time = 1.2
+one_shot = true
+
+[node name="deathText" type="Label" parent="."]
+visible = false
+offset_left = -248.0
+offset_top = -64.0
+offset_right = 250.0
+offset_bottom = 70.0
+text = "YOU HAVE DIED!
+PRESS R TO RESTART"
+label_settings = SubResource("LabelSettings_oqo0i")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_xibcl")
+volume_db = -18.0
+autoplay = true
+
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="animation_finished" from="hurtAnim" to="." method="_on_hurt_anim_animation_finished"]
+[connection signal="timeout" from="WaitForPlayerDeath" to="." method="_on_wait_for_player_death_timeout"]

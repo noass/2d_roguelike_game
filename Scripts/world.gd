@@ -19,7 +19,7 @@ var numberOfRooms = 0
 
 @onready var mob = preload("res://Scenes/mob.tscn")
 var mobGroup = [] # List to store mobs
-var spawnMobs = 40
+var spawnMobs = randi_range(60, 80)
 @onready var starting_room = roomArr[0].instantiate()
 
 func _ready():

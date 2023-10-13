@@ -6,9 +6,9 @@
 size = Vector2(480, 320)
 
 [sub_resource type="NavigationPolygon" id="NavigationPolygon_v5tdq"]
-vertices = PackedVector2Array(272, 32, 464, 16, 448, 128, 208, 32, 448, 192, 464, 304, 272, 288, 32, 128, 208, 288, 16, 304, 32, 192, 16, 16, 224, 0, 256, 0, 480, 144, 480, 176, 256, 320, 224, 320, 0, 176, 0, 144)
-polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2), PackedInt32Array(3, 0, 4, 5, 6, 7), PackedInt32Array(8, 9, 10), PackedInt32Array(7, 11, 3), PackedInt32Array(12, 13, 0, 3), PackedInt32Array(2, 14, 15, 4), PackedInt32Array(6, 16, 17, 8), PackedInt32Array(10, 18, 19, 7), PackedInt32Array(0, 2, 4), PackedInt32Array(7, 6, 8, 10)])
-outlines = Array[PackedVector2Array]([PackedVector2Array(224, 0, 208, 32, 16, 16, 32, 128, 0, 144, 0, 176, 32, 192, 16, 304, 208, 288, 224, 320, 256, 320, 272, 288, 464, 304, 448, 192, 480, 176, 480, 144, 448, 128, 464, 16, 272, 32, 256, 0)])
+vertices = PackedVector2Array(208, 0, 272, 0, 272, 16, 208, 16, 464, 16, 464, 128, 480, 128, 480, 192, 464, 192, 464, 304, 272, 304, 16, 128, 272, 320, 208, 320, 208, 304, 16, 304, 16, 192, 0, 192, 0, 128, 16, 16)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5), PackedInt32Array(5, 6, 7, 8), PackedInt32Array(3, 2, 8, 9, 10, 11), PackedInt32Array(10, 12, 13, 14), PackedInt32Array(14, 15, 16), PackedInt32Array(16, 17, 18, 11), PackedInt32Array(11, 19, 3), PackedInt32Array(2, 5, 8), PackedInt32Array(11, 10, 14, 16)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(208, 0, 208, 16, 16, 16, 16, 128, 0, 128, 0, 192, 16, 192, 16, 304, 208, 304, 208, 320, 272, 320, 272, 304, 464, 304, 464, 192, 480, 192, 480, 128, 464, 128, 464, 16, 272, 16, 272, 0)])
 
 [node name="room1" type="Node2D" groups=["room"]]
 scale = Vector2(2, 2)
