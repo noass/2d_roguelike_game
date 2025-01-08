@@ -367,10 +367,10 @@ texture = ExtResource("3_axo41")
 hframes = 7
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-speed_scale = 4.0
 libraries = {
 "": SubResource("AnimationLibrary_uwftn")
 }
+speed_scale = 4.0
 
 [node name="DamageArea" type="Area2D" parent="."]
 position = Vector2(0, -1.5)
@@ -379,10 +379,10 @@ position = Vector2(0, -1.5)
 shape = SubResource("CapsuleShape2D_mcv6u")
 
 [node name="hurtAnim" type="AnimationPlayer" parent="."]
-speed_scale = 3.0
 libraries = {
 "": SubResource("AnimationLibrary_igkd1")
 }
+speed_scale = 3.0
 
 [node name="playerDied" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("5_bcq75")
@@ -417,7 +417,7 @@ vertical_alignment = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_xibcl")
-volume_db = -18.0
+volume_db = -20.0
 autoplay = true
 
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]

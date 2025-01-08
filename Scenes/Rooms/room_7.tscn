@@ -9,6 +9,7 @@ size = Vector2(480, 320)
 vertices = PackedVector2Array(16, 16, 464, 16, 464, 128, 16, 128, 480, 128, 480, 192, 464, 192, 272, 304, 208, 304, 16, 192, 464, 304, 272, 320, 208, 320, 16, 304, 0, 192, 0, 128)
 polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(2, 4, 5, 6), PackedInt32Array(3, 2, 6, 7, 8, 9), PackedInt32Array(6, 10, 7), PackedInt32Array(7, 11, 12, 8), PackedInt32Array(8, 13, 9), PackedInt32Array(3, 9, 14, 15)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(16, 16, 16, 128, 0, 128, 0, 192, 16, 192, 16, 304, 208, 304, 208, 320, 272, 320, 272, 304, 464, 304, 464, 192, 480, 192, 480, 128, 464, 128, 464, 16)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="room2" type="Node2D" groups=["room"]]
 scale = Vector2(2, 2)

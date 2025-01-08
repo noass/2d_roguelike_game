@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var ray = $RayCast2D
-@onready var area2D = $Mob
+@onready var area2D = $Area2D
 @onready var hitAnim = $HitAnim
 @onready var hitShader = $Sprite2D.material
 
@@ -62,7 +62,7 @@ func died():
 	$MovingAnims.play("death")
 	slimeDiedSound.play()
 	$CollisionShape2D.disabled = true
-	$Mob/CollisionShape2D.disabled = true
+	$Area2D/CollisionShape2D.disabled = true
 
 func _on_moving_anims_animation_finished(anim_name):
 	if anim_name == "death":
